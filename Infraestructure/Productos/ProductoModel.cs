@@ -88,6 +88,50 @@ namespace Infraestructure.Productos
             }
             return tmp;
         }
+
+        public Producto[] GetProductoByRangoPrecio(decimal from, decimal to)
+        {
+            Producto[] tmp = null;
+            if (productos == null)
+            {
+                return tmp;
+            }
+            foreach (Producto p in productos)
+            {
+                if (p.Precio >= from && p.Precio <= to)
+                {
+                    Add(p, ref tmp);
+                }
+            }
+            return tmp;
+        }
+
+        public Producto[] GetProductoByVencimiento(DateTime dt)
+        {
+            Producto[] tmp = null;
+            if (productos == null)
+            {
+                return tmp;
+            }
+            foreach (Producto p in productos)
+            {
+                if (p.FechaVencimiento.CompareTo(dt) <= 0)
+                {
+                    Add(p, ref tmp);
+                }
+            }
+            return tmp;
+        }
+
+        public int GetLastProductoId()
+        {
+            return productos == null ? 0 : productos[productos.Length - 1].Id;
+        }
+
+        public string GetProductoAsJason()
+        {
+            return JsonConvert.
+        }
         #endregion
 
         #region Private method
